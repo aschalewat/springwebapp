@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!-- was: <?xml version="1.0" encoding="UTF-8"?> -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:mvc="http://www.springframework.org/schema/mvc" 
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation=
+       "http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	   
+	   http://www.springframework.org/schema/p
+	   http://www.springframework.org/schema/p/spring-p-4.3.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.3.xsd 
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd" >
+
+
+
+
+     
+    <mvc:annotation-driven/>
+    <context:component-scan base-package = "com.aschalew.springwebapp" />
+    
+     <mvc:resources mapping="/resources/**" location="/,classpath:/resources/js/"  
+	cache-period="31556926"/> 
+	
+ 	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+    <bean id="HandlerMapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+   
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+          <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+          	<property name = "prefix">
+          		<value>/WEB-INF/jsp/</value>
+          	</property>
+          	<property name = "suffix">
+          		<value>.jsp</value>
+          	</property>
+      </bean>
+      
+     <bean id = "exceptioResolver" 
+     		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+  			 <property name="exceptionMappings">
+      			<map>
+         				<entry key="NullPointerException" value = "NullPointerException"/>
+         				<entry key="IOException" value = "IOException"/>
+        		 </map>
+      		</property>
+   			<property name="defaultErrorView" value="Exception"/>
+   			<property name = "warnLogCategory" value = "MVCLogger"/>
+	</bean>
+    <bean class="springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration" id="swagger2Config">  
+	</bean>     
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 
+         <!-- setting maximum upload size -->
+        <property name="maxUploadSize" value="50000000" />
+ 
+    </bean>
+    
+	 <mvc:default-servlet-handler />
+
+
+</beans>
