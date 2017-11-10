@@ -11,16 +11,20 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aschalew.model.User;
+import org.apache.log4j.Logger;
 
 @Controller
 @Api(value="This is the Home controller")
 public class HomeController {
+
+	private static final Logger LOGGER = Logger.getLogger(HomeController.class);
 
 	@RequestMapping(value= "/pageone.html", method = RequestMethod.GET)	
 	@ApiOperation(value="Gets page one")
 	public ModelAndView givePage1(){
 		ModelAndView modelAndView = new ModelAndView("page1");
 		modelAndView.addObject("msg1","This is the first message");
+		LOGGER.info("Returning a ModelAndView object");
 		return modelAndView;
 		
 	}
