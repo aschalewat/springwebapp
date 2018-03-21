@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value ="User", description="model")
 public class User {
-	//
+	//test
 	String name;
 	String id;
 	
